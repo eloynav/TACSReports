@@ -12,7 +12,7 @@ COPY requirements.txt .
 
 # Install any dependencies
 RUN pip install --upgrade pip
-RUN pip install plotly=5.11.0
+RUN pip install plotly
 RUN pip install -r requirements.txt
 
 # Copy the content of the local src directory to the working directory
