@@ -48,7 +48,7 @@ def hello():
                   ]))])
     fig.update_layout(title_text="TACS Category to Report to Table Diagram Flow", font_size=10)
     fig.show()
-    return fig.show()
+    return "TACS Category to Report to Table Diagram flow"
 
 if __name__ == '__main__':
     port = os.environ.get('FLASK_PORT') or 8080
