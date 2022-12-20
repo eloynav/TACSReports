@@ -1,7 +1,7 @@
 from flask import Flask
 from datetime import datetime
 import os
-import ploty.graph_objects as go
+import plotly.graph_objects as go
 
 app = Flask(__name__)
 
