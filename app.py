@@ -8,7 +8,7 @@ app = Flask(__name__)
 @app.route('/')
 
 def hello():
-    fig = go.Figura(data = [go.Sankey(
+    fig = go.Figure(data = [go.Sankey(
           node = dict(
                  pad = 15,
                  thickness = 15,
