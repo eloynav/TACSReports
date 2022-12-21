@@ -12,7 +12,11 @@ COPY requirements.txt .
 
 # Install any dependencies
 RUN pip install --upgrade pip
-RUN pip install plotly
+RUN pip install gunicorn
+RUN pip install dash==0.21.0
+RUN pip install dash-core-components==0.21.0
+RUN pip install dash-html-components==0.9.0
+RUN pip install dash-renderer==0.11.3
 RUN pip install -r requirements.txt
 
 # Copy the content of the local src directory to the working directory

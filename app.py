@@ -1,15 +1,29 @@
-from flask import Flask
-from datetime import datetime
+import dash
+import dash_core_components as dcc
+import dash_html_components as html
 import os
-import plotly.graph_objects as go
 
-app = Flask(__name__)
+workers = int(os.environ.get('GUNICORN_PROCESS', '3'))
+threads = int(os.environ.get('GUNICORN_THREADS', '1'))
 
-@app.route('/')
+forwarded_allow_ips = '*'
+secure_schema_headers = { 'X-Forwarded-Proto': 'https' }
 
-def hello():
-    fig = go.Figure(data = [go.Sankey(
-          node = dict(
+app = dash.Dash()
+application = app.server
+
+app.layout = html.Div(children=[
+    html.H1(children='Hello Dash'),
+
+    html.Div(children='''
+        Dash: A web application framwork for Python.
+    '''),
+
+    dcc.Graph(
+        id='TACS PTT Reports',
+        data : [go.Sankey(
+                 # Define nodes                                  
+                 node = dict(
                  pad = 15,
                  thickness = 15,
                  line = dict(color = "black", width = 0.5),
@@ -46,12 +60,8 @@ def hello():
                                        "rgba(31, 119, 180, 0.8)",
                                        "rgba(214, 39, 40, 0.8)"
                   ]))])
-    fig.update_layout(title_text="TACS Category to Report to Table Diagram Flow", font_size=10)
-    fig.show()
-    return "TACS Category to Report to Table Diagram flow"
+app.css.append_css({"external_url:"https://codepen.io/chriddyp/pen/bWLwgP.css"})
+
 
 if __name__ == '__main__':
-    port = os.environ.get('FLASK_PORT') or 8080
-    port = int(port)
-
-    app.run(port=port,host='0.0.0.0')
+    app.run_server(port=8080,host='0.0.0.0',degub=True)
